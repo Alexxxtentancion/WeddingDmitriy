@@ -1,38 +1,43 @@
 # Сайт-приглашение на свадьбу
 
-Одностраничный сайт-приглашение с React-фронтендом и FastAPI-бэкендом. Ответы RSVP сохраняются в CSV на сервере.
+Одностраничный сайт-приглашение на React. Ответы RSVP сохраняются в **Google Таблицы** через Google Apps Script — без собственного бэкенда.
 
 ## Стек
 
 - **Frontend:** React 18, Vite, TypeScript, CSS Modules (mobile-first)
-- **Backend:** FastAPI, Python 3.12
+- **RSVP:** Google Apps Script → Google Sheets
 - **Карты:** Яндекс.Карты JS API 2.1
-- **Деплой:** Docker Compose + Nginx
+- **Деплой:** Vercel (рекомендуется) или любой static host
 
 ## Быстрый старт (локально)
 
-### 1. Настройка окружения
+### 1. Настройка Google Таблицы
+
+Подробная инструкция: [`google-apps-script/README.md`](google-apps-script/README.md)
+
+Кратко:
+
+1. Создайте Google Таблицу, лист **`RSVP`**, заголовки: `Дата и время | Имя | Присутствие | Гостей | Еда | Напитки | Комментарий`
+2. **Расширения → Apps Script** → вставьте код из [`google-apps-script/Code.gs`](google-apps-script/Code.gs)
+3. **Развернуть → Веб-приложение** (Execute as: Me, Access: Anyone)
+4. Скопируйте URL развёртывания
+
+### 2. Переменные окружения
 
 ```bash
 cp .env.example .env
 ```
 
-Заполните `.env`:
+Заполните `.env` в корне проекта (Vite подхватит при запуске из `frontend/`):
 
-- `VITE_YANDEX_MAPS_KEY` — ключ с [developer.tech.yandex.ru](https://developer.tech.yandex.ru/)
-- `RSVP_DEADLINE` — дедлайн RSVP (YYYY-MM-DD), должен совпадать с `frontend/src/config/wedding.ts`
-
-### 2. Backend
-
-```bash
-cd backend
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
+```env
+VITE_YANDEX_MAPS_KEY=ваш_ключ_яндекс_карт
+VITE_GOOGLE_SCRIPT_URL=https://script.google.com/macros/s/XXXX/exec
 ```
 
-### 3. Frontend
+Для локальной разработки скопируйте `.env` в `frontend/.env` или задайте переменные в `frontend/.env.local`.
+
+### 3. Запуск
 
 ```bash
 cd frontend
@@ -40,8 +45,7 @@ npm install
 npm run dev
 ```
 
-Сайт: [http://localhost:5173](http://localhost:5173)  
-API проксируется на `localhost:8000` через Vite.
+Сайт: [http://localhost:5173](http://localhost:5173)
 
 ## Редактирование контента
 
@@ -51,92 +55,55 @@ API проксируется на `localhost:8000` через Vite.
 frontend/src/config/wedding.ts
 ```
 
-Измените имена, дату, программу, локации, дресс-код и дедлайн RSVP без правки компонентов.
+## Деплой на Vercel
 
-## Деплой на VPS
+1. Загрузите репозиторий на GitHub
+2. [vercel.com](https://vercel.com) → **Add New Project** → Import репозитория
+3. **Root Directory:** `frontend`
+4. **Environment Variables:**
+   - `VITE_YANDEX_MAPS_KEY`
+   - `VITE_GOOGLE_SCRIPT_URL`
+5. **Deploy**
 
-### Требования
+Файл [`frontend/vercel.json`](frontend/vercel.json) уже настроен для Vite.
 
-- Docker и Docker Compose
-- Открытый порт 80 (или измените mapping в `docker-compose.yml`)
+После деплоя добавьте домен Vercel в Referer ограничения ключа Яндекс.Карт.
 
-### Запуск
-
-```bash
-# На сервере
-git clone <repo-url> wedding
-cd wedding
-cp .env.example .env
-# Заполните .env
-
-docker compose up -d --build
-```
-
-Сайт будет доступен на порту 80.
-
-### Скачивание ответов RSVP
-
-CSV-файл хранится в `backend/data/rsvp.csv` на хосте:
+## Деплой через Docker (опционально)
 
 ```bash
-# На сервере
-cat backend/data/rsvp.csv
-
-# С локальной машины
-scp user@your-server:/path/to/wedding/backend/data/rsvp.csv .
+cd frontend
+docker build \
+  --build-arg VITE_YANDEX_MAPS_KEY=... \
+  --build-arg VITE_GOOGLE_SCRIPT_URL=... \
+  -t wedding-site .
+docker run -p 80:80 wedding-site
 ```
 
-### HTTPS (опционально)
+## Просмотр ответов RSVP
 
-Настройте reverse proxy (Caddy, Nginx + certbot) перед контейнером `web` или добавьте certbot в docker-compose.
+Откройте Google Таблицу — каждая отправка формы добавляет новую строку на лист `RSVP`.
 
 ## Структура проекта
 
 ```
 WeddingDmitriy/
-├── frontend/           # React SPA
-│   ├── src/config/     # Контент сайта (редактировать здесь)
-│   └── Dockerfile      # Multi-stage: build + Nginx
-├── backend/
-│   ├── app/            # FastAPI приложение
-│   └── data/           # CSV с ответами RSVP
-├── docker-compose.yml
+├── frontend/              # React SPA
+│   ├── src/config/        # Контент сайта
+│   ├── src/api/rsvp.ts    # Отправка в Google Sheets
+│   └── vercel.json
+├── google-apps-script/    # Скрипт для Google Таблицы
 └── .env.example
-```
-
-## API
-
-| Метод | Путь | Описание |
-|-------|------|----------|
-| GET | `/api/health` | Проверка работоспособности |
-| POST | `/api/rsvp` | Сохранение ответа RSVP |
-
-Пример тела запроса:
-
-```json
-{
-  "name": "Иван Иванов",
-  "attending": true,
-  "guests_count": 2,
-  "food": "meat",
-  "drinks": ["champagne", "white_wine"],
-  "comment": "Без лука"
-}
 ```
 
 ## Mobile QA чеклист
 
-Перед публикацией проверьте в Chrome DevTools (режим устройства):
+- [ ] iPhone SE (375px) — нет горизонтального скролла
+- [ ] Бургер-меню работает, форма RSVP отправляется
+- [ ] Карта или fallback + ссылка «Открыть в Яндекс.Картах»
+- [ ] Поля формы ≥ 44px, font-size 16px (без zoom в iOS Safari)
 
-- [ ] **iPhone SE (375px)** — нет горизонтального скролла, текст не обрезан
-- [ ] **iPhone 14 (390px)** — бургер-меню открывается/закрывается, все секции доступны
-- [ ] **Android (360px)** — tap-цели формы ≥ 44px, поля не вызывают zoom в iOS Safari
-- [ ] **Hero** — таймер 2×2, CTA-кнопка на всю ширину
-- [ ] **Карта** — отображается или показывает fallback + ссылка «Открыть в Яндекс.Картах»
-- [ ] **RSVP** — форма отправляется, success/error баннеры видны
-- [ ] **Навигация** — якорные ссылки скроллят к секциям, Escape закрывает меню
-
-## Сборка frontend без Docker
+## Сборка
 
 ```bash
 cd frontend

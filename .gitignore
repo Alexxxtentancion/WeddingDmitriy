@@ -1,17 +1,8 @@
 # Dependencies
 node_modules/
-__pycache__/
-*.py[cod]
-.venv/
-venv/
-env/
 
 # Build
 frontend/dist/
-*.egg-info/
-
-# Data
-backend/data/*.csv
 
 # Environment
 .env
