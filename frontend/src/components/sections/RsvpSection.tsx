@@ -34,7 +34,7 @@ export function RsvpSection() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setErrorMessage('')
-
+    console.log("dcsdckmsoc")
     if (!name.trim()) {
       setErrorMessage('Пожалуйста, укажите имя и фамилию')
       setStatus('error')

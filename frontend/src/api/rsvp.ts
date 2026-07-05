@@ -20,7 +20,8 @@ export interface RsvpFormData {
   comment?: string
 }
 
-const SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxOyEJMHLeEvy4D0pUPJ8zPp2owyRROjGwInBJZYcI79KHGO6kyP6O6bB9MQZTQXbIh8w/exec'
+
 
 const drinkLabels = Object.fromEntries(
   drinkOptions.map((option) => [option.value, option.label]),
@@ -40,7 +41,7 @@ export async function submitRsvp(data: RsvpFormData): Promise<void> {
   if (!SCRIPT_URL) {
     throw new Error('Не настроен URL Google Apps Script (VITE_GOOGLE_SCRIPT_URL)')
   }
-
+  console.log(SCRIPT_URL)
   const payload = {
     timestamp: new Date().toISOString(),
     name: data.name,
