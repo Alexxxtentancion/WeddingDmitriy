@@ -1,0 +1,27 @@
+.description {
+  text-align: center;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.swatch {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .swatch {
+    width: 72px;
+    height: 72px;
+  }
+}

@@ -1,0 +1,54 @@
+.timeline {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--color-border);
+}
+
+.item {
+  position: relative;
+  padding-bottom: var(--space-lg);
+}
+
+.item:last-child {
+  padding-bottom: 0;
+}
+
+.item::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem;
+  top: 0.35rem;
+  width: 9px;
+  height: 9px;
+  margin-left: -4px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 2px solid var(--color-bg);
+}
+
+.time {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--color-accent);
+  margin-bottom: 0.25rem;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  margin-bottom: 0.25rem;
+}
+
+.place {
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+}
