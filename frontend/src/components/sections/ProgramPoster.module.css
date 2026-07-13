@@ -1,0 +1,90 @@
+.poster {
+  position: relative;
+  margin: 0 auto;
+  width: min(560px, 100%);
+  aspect-ratio: 3 / 4;
+  background: #f6efdf;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 30px 90px rgba(36, 36, 36, 0.14);
+  border: 1px solid rgba(36, 36, 36, 0.12);
+}
+
+.hanging {
+  position: absolute;
+  top: -14px;
+  right: 10px;
+  width: 120px;
+  pointer-events: none;
+  opacity: 0.95;
+}
+
+.title {
+  position: absolute;
+  top: 26px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--font-script);
+  font-size: 3.1rem;
+  color: rgba(36, 36, 36, 0.92);
+}
+
+.wave {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.item {
+  position: absolute;
+  width: 42%;
+  text-align: center;
+  color: rgba(36, 36, 36, 0.92);
+}
+
+.left1 {
+  top: 110px;
+  left: 7%;
+}
+
+.right1 {
+  top: 140px;
+  right: 7%;
+}
+
+.left2 {
+  top: 250px;
+  left: 7%;
+}
+
+.right2 {
+  top: 290px;
+  right: 7%;
+}
+
+.time {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  margin-bottom: 0.2rem;
+}
+
+.label {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+}
+
+.icon {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 0.35rem;
+  opacity: 0.9;
+}
+
+@media (min-width: 768px) {
+  .hanging {
+    width: 140px;
+    right: 16px;
+  }
+}
+

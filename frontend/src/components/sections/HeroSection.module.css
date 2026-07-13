@@ -2,62 +2,72 @@
   text-align: center;
 }
 
-.names {
-  font-size: var(--text-hero);
-  line-height: 1.1;
-  margin-bottom: var(--space-sm);
+.polaroidRow {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: var(--space-md);
 }
 
-.ampersand {
+.polaroid {
+  width: 170px;
+  padding: 10px 10px 22px;
+  background: #fff;
+  box-shadow: 0 18px 48px rgba(36, 36, 36, 0.18);
+  transform: rotate(-3deg);
+  border-radius: 2px;
+}
+
+.polaroidImg {
+  width: 100%;
+  height: 108px;
+  object-fit: cover;
   display: block;
-  font-style: italic;
-  font-size: 0.6em;
-  color: var(--color-accent);
-  margin: 0.15em 0;
 }
 
-.date {
-  font-size: var(--text-body);
-  color: var(--color-text-muted);
+.names {
+  font-family: var(--font-script);
+  font-size: clamp(2.4rem, 10vw, 4.2rem);
+  line-height: 1.05;
+  margin: 0.25rem 0 var(--space-sm);
+}
+
+.subtitle {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: var(--space-lg);
+  color: rgba(36, 36, 36, 0.7);
+  margin-bottom: var(--space-md);
 }
 
 .countdown {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-sm);
-  max-width: 320px;
-  margin: 0 auto var(--space-lg);
-}
-
-@media (min-width: 768px) {
-  .countdown {
-    grid-template-columns: repeat(4, 1fr);
-    max-width: 480px;
-  }
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  max-width: 520px;
+  margin: 0 auto var(--space-md);
 }
 
 .countdownItem {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--space-sm);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  padding: 0.65rem 0.5rem;
+  border: 1px solid rgba(127, 143, 74, 0.55);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.55);
 }
 
 .countdownValue {
   font-family: var(--font-serif);
-  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-size: clamp(1.3rem, 6vw, 2rem);
   line-height: 1;
-  color: var(--color-accent);
+  color: rgba(36, 36, 36, 0.92);
 }
 
 .countdownLabel {
   font-size: var(--text-small);
-  color: var(--color-text-muted);
+  color: rgba(36, 36, 36, 0.62);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-top: 0.25rem;
@@ -68,6 +78,53 @@
   font-size: var(--text-h2);
   color: var(--color-accent);
   margin-bottom: var(--space-lg);
+}
+
+.dateLine {
+  margin-top: var(--space-sm);
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(127, 143, 74, 0.7);
+}
+
+.dateStrip {
+  margin: 0.9rem auto var(--space-lg);
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.dateCell {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(127, 143, 74, 0.6);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.55);
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  position: relative;
+}
+
+.dateCellActive {
+  border-color: rgba(127, 143, 74, 0.85);
+}
+
+.heartMark {
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  right: -18px;
+  bottom: -16px;
+  object-fit: contain;
+  pointer-events: none;
+  /* remove black background from asset */
+  mix-blend-mode: screen;
+  filter: brightness(1.05);
 }
 
 .ctaWrapper {

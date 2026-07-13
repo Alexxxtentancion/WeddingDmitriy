@@ -1,54 +1,98 @@
-.timeline {
+.poster {
   position: relative;
-  padding-left: 1.5rem;
+  margin: 0 auto;
+  width: min(560px, 100%);
+  min-height: 640px;
+  background: #f7f4ea;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 30px 90px rgba(36, 36, 36, 0.14);
+  border: 1px solid rgba(36, 36, 36, 0.12);
+  padding: 2.5rem 1.25rem 2rem;
 }
 
-.timeline::before {
-  content: '';
+.hanging {
   position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: var(--color-border);
+  top: -10px;
+  right: 8px;
+  width: 110px;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.title {
+  text-align: center;
+  font-family: var(--font-script);
+  font-size: clamp(2.6rem, 8vw, 3.2rem);
+  color: rgba(36, 36, 36, 0.92);
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.wave {
+  position: absolute;
+  left: 50%;
+  top: 110px;
+  bottom: 40px;
+  width: 2px;
+  transform: translateX(-50%);
+  background: url('/decor/wave.svg') center / contain no-repeat;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem 1rem;
 }
 
 .item {
-  position: relative;
-  padding-bottom: var(--space-lg);
+  text-align: center;
+  color: rgba(36, 36, 36, 0.92);
 }
 
-.item:last-child {
-  padding-bottom: 0;
+.item:nth-child(even) {
+  margin-top: 2.5rem;
 }
 
-.item::before {
-  content: '';
-  position: absolute;
-  left: -1.5rem;
-  top: 0.35rem;
-  width: 9px;
-  height: 9px;
-  margin-left: -4px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  border: 2px solid var(--color-bg);
+.icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 0.4rem;
+  object-fit: contain;
+  /* Tilda icons are light gray line-art — make them dark on cream */
+  filter: brightness(0);
+  opacity: 0.88;
 }
 
 .time {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
-  color: var(--color-accent);
-  margin-bottom: 0.25rem;
+  font-size: 1.2rem;
+  margin-bottom: 0.15rem;
 }
 
-.title {
+.label {
   font-family: var(--font-serif);
-  font-size: 1.125rem;
-  margin-bottom: 0.25rem;
+  font-size: 1.05rem;
 }
 
 .place {
-  font-size: var(--text-small);
-  color: var(--color-text-muted);
+  margin-top: 0.15rem;
+  font-size: 0.8rem;
+  color: rgba(36, 36, 36, 0.55);
+}
+
+@media (min-width: 768px) {
+  .hanging {
+    width: 130px;
+    right: 16px;
+  }
+
+  .poster {
+    padding: 3rem 1.75rem 2.25rem;
+  }
 }

@@ -1,3 +1,4 @@
+import { InviteIntro } from './components/InviteIntro'
 import { Navigation } from './components/Navigation'
 import { DressCodeSection } from './components/sections/DressCodeSection'
 import { HeroSection } from './components/sections/HeroSection'
@@ -7,8 +8,13 @@ import { RsvpSection } from './components/sections/RsvpSection'
 import { StorySection } from './components/sections/StorySection'
 
 function App() {
+  const openInvite = () => {
+    document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   return (
     <>
+      <InviteIntro onOpenInvite={openInvite} />
       <Navigation />
       <main>
         <HeroSection />

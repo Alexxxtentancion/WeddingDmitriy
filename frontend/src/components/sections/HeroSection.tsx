@@ -11,10 +11,24 @@ const countdownLabels = [
   { key: 'seconds' as const, label: 'Секунд' },
 ]
 
+function getDateStrip(targetIso: string): Array<{ day: number; isTarget: boolean }> {
+  const target = new Date(targetIso)
+  const start = new Date(target)
+  start.setDate(target.getDate() - 5)
+  const days: Array<{ day: number; isTarget: boolean }> = []
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(start)
+    d.setDate(start.getDate() + i)
+    days.push({ day: d.getDate(), isTarget: d.toDateString() === target.toDateString() })
+  }
+  return days
+}
+
 export function HeroSection() {
   const { ref, isVisible } = useInView()
   const countdown = useCountdown(weddingConfig.date)
   const { bride, groom } = weddingConfig.couple
+  const dateStrip = getDateStrip(weddingConfig.date)
 
   const scrollToRsvp = () => {
     document.getElementById('rsvp')?.scrollIntoView({ behavior: 'smooth' })
@@ -27,12 +41,17 @@ export function HeroSection() {
       className={`${shared.section} ${shared.fadeIn} ${isVisible ? shared.fadeInVisible : ''}`}
     >
       <div className={`${shared.container} ${styles.hero}`}>
+        <div className={styles.polaroidRow} aria-hidden="true">
+          <div className={styles.polaroid}>
+            <img className={styles.polaroidImg} src="/main_image.png" alt="" />
+          </div>
+        </div>
+
         <h1 className={styles.names}>
-          {bride}
-          <span className={styles.ampersand}>&</span>
-          {groom}
+          {bride} & {groom}
         </h1>
-        <p className={styles.date}>{formatWeddingDate(weddingConfig.date)}</p>
+
+        <p className={styles.subtitle}>Мы скажем друг другу “Да” через:</p>
 
         {countdown.isPast ? (
           <p className={styles.pastMessage}>Мы уже вместе!</p>
@@ -46,6 +65,27 @@ export function HeroSection() {
             ))}
           </div>
         )}
+
+        <p className={styles.dateLine}>{formatWeddingDate(weddingConfig.date)}</p>
+
+        <div className={styles.dateStrip} aria-label="Календарь">
+          {dateStrip.map((d) => (
+            <div
+              key={d.day}
+              className={`${styles.dateCell} ${d.isTarget ? styles.dateCellActive : ''}`}
+            >
+              {d.day}
+              {d.isTarget && (
+                <img
+                  className={styles.heartMark}
+                  src="/decor/heart-olive.png"
+                  alt=""
+                  aria-hidden="true"
+                />
+              )}
+            </div>
+          ))}
+        </div>
 
         <div className={styles.ctaWrapper}>
           <button type="button" className={shared.button} onClick={scrollToRsvp}>

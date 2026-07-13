@@ -34,7 +34,7 @@ export function RsvpSection() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setErrorMessage('')
-    console.log("dcsdckmsoc")
+
     if (!name.trim()) {
       setErrorMessage('Пожалуйста, укажите имя и фамилию')
       setStatus('error')
@@ -84,24 +84,26 @@ export function RsvpSection() {
       className={`${shared.section} ${shared.fadeIn} ${isVisible ? shared.fadeInVisible : ''}`}
     >
       <div className={shared.container}>
-        <h2 className={shared.sectionTitle}>Подтверждение присутствия</h2>
-        <div className={shared.divider} />
+        <div className={styles.card}>
+          <img className={styles.hanging} src="/decor/hanging.png" alt="" aria-hidden="true" />
+          <h2 className={styles.title}>Анкета</h2>
 
-        <p className={styles.deadline}>
-          Пожалуйста, ответьте до {formatDeadline(weddingConfig.rsvpDeadline)}
-        </p>
+          <p className={styles.deadline}>
+            Мы очень старались сделать праздник незабываемым, поэтому будем рады, если Вы
+            подтвердите свое присутствие до {formatDeadline(weddingConfig.rsvpDeadline)}:
+          </p>
 
-        {closed ? (
-          <div className={styles.closedMessage}>
-            К сожалению, срок подтверждения присутствия истёк. Если у вас изменились
-            планы, свяжитесь с нами лично.
-          </div>
-        ) : status === 'success' ? (
-          <div className={styles.bannerSuccess} role="status">
-            Спасибо! Ваш ответ сохранён. Ждём вас на празднике!
-          </div>
-        ) : (
-          <form className={styles.form} onSubmit={handleSubmit} noValidate>
+          {closed ? (
+            <div className={styles.closedMessage}>
+              К сожалению, срок подтверждения присутствия истёк. Если у вас изменились
+              планы, свяжитесь с нами лично.
+            </div>
+          ) : status === 'success' ? (
+            <div className={styles.bannerSuccess} role="status">
+              Спасибо! Ваш ответ сохранён. Ждём вас на празднике!
+            </div>
+          ) : (
+            <form className={styles.form} onSubmit={handleSubmit} noValidate>
             {status === 'error' && errorMessage && (
               <div className={styles.bannerError} role="alert">
                 {errorMessage}
@@ -235,7 +237,8 @@ export function RsvpSection() {
               </button>
             </div>
           </form>
-        )}
+          )}
+        </div>
       </div>
     </section>
   )

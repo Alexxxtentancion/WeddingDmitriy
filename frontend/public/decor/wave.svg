@@ -1,0 +1,13 @@
+<svg width="560" height="760" viewBox="0 0 560 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path
+    d="M290 120
+       C250 170 310 220 270 270
+       C230 320 310 370 270 420
+       C230 470 310 520 270 570
+       C230 620 300 670 260 720"
+    stroke="#2A2A2A"
+    stroke-opacity="0.55"
+    stroke-width="2"
+    stroke-linecap="round"
+  />
+</svg>

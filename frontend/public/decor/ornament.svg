@@ -1,0 +1,21 @@
+<svg width="320" height="44" viewBox="0 0 320 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path
+    d="M8 22c24 0 40-14 56-14 12 0 18 8 18 14s-6 14-18 14c-16 0-32-14-56-14Zm304 0c-24 0-40-14-56-14-12 0-18 8-18 14s6 14 18 14c16 0 32-14 56-14Z"
+    stroke="#7F8F4A"
+    stroke-opacity="0.9"
+    stroke-width="2.2"
+    stroke-linecap="round"
+  />
+  <path
+    d="M160 10c-8 6-12 10-12 12s4 6 12 12c8-6 12-10 12-12s-4-6-12-12Z"
+    fill="#7F8F4A"
+    fill-opacity="0.35"
+  />
+  <path
+    d="M108 22c14-10 26-14 52-14s38 4 52 14c-14 10-26 14-52 14s-38-4-52-14Z"
+    stroke="#7F8F4A"
+    stroke-opacity="0.75"
+    stroke-width="1.6"
+    stroke-linecap="round"
+  />
+</svg>

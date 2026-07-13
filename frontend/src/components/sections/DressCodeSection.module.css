@@ -1,7 +1,11 @@
 .description {
   text-align: center;
-  color: var(--color-text-muted);
-  margin-bottom: var(--space-lg);
+  color: var(--color-text);
+  margin: 0 auto var(--space-lg);
+  max-width: 520px;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1.55;
 }
 
 .swatches {
@@ -9,6 +13,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-sm);
+  margin-bottom: var(--space-md);
 }
 
 .swatch {
@@ -17,6 +22,7 @@
   border-radius: 50%;
   border: 2px solid var(--color-border);
   flex-shrink: 0;
+  box-shadow: 0 10px 26px rgba(36, 36, 36, 0.08);
 }
 
 @media (min-width: 768px) {

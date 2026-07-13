@@ -1,13 +1,18 @@
 :root {
-  --color-bg: #faf8f5;
-  --color-text: #2c2c2c;
-  --color-text-muted: #6b6b6b;
-  --color-accent: #8b9e8b;
-  --color-accent-dark: #6d806d;
-  --color-border: #e8e4df;
+  /* Paper white like reference screenshot */
+  --color-bg: #ffffff;
+  --color-surface: #f7f4ea;
+  --color-text: #1a1a1a;
+  --color-text-muted: #4a4a4a;
+  --color-accent: #7f8f4a; /* olive */
+  --color-accent-dark: #5e6e31;
+  --color-gold: #e8a63d;
+  --color-gold-dark: #c88728;
+  --color-border: rgba(26, 26, 26, 0.14);
   --color-white: #ffffff;
 
   --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-script: 'Great Vibes', 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Montserrat', system-ui, sans-serif;
 
   --space-xs: 0.5rem;
@@ -26,7 +31,7 @@
   --text-small: 0.875rem;
 
   --touch-target: 44px;
-  --radius: 4px;
+  --radius: 14px;
   --transition: 0.3s ease;
 }
 
@@ -47,6 +52,7 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--color-bg);
 }
 
 body {
@@ -56,12 +62,20 @@ body {
   line-height: 1.6;
   color: var(--color-text);
   background-color: var(--color-bg);
+  background-image: url('/decor/paper-bg.png');
+  background-repeat: repeat;
+  background-size: 280px 280px;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
+::selection {
+  background: rgba(127, 143, 74, 0.25);
+}
+
 #root {
   min-height: 100dvh;
+  background: transparent;
 }
 
 h1,
