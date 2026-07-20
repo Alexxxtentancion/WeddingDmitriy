@@ -17,6 +17,11 @@ export const weddingConfig = {
   },
   date: '2026-09-12T15:00:00+03:00',
   rsvpDeadline: '2026-08-15',
+  invitation: {
+    greeting: 'Наши родные и друзья!',
+    textLead: 'Мы будем счастливы разделить с вами',
+    textTail: 'радость неповторимого для нас дня – дня рождения нашей семьи!',
+  },
   story: {
     title: 'Наша история',
     paragraphs: [
@@ -28,24 +33,24 @@ export const weddingConfig = {
   },
   program: [
     {
-      time: '15:00',
-      title: 'Сбор гостей',
-      place: 'Усадьба «Белая ROSA», терраса',
+      time: '15:00 - 17:00',
+      title: 'Welcome и церемония',
+      place: '',
     },
     {
-      time: '16:00',
-      title: 'Церемония',
-      place: 'Усадьба «Белая ROSA», сад',
+      time: '17:00',
+      title: 'Ужин',
+      place: '',
     },
     {
-      time: '18:00',
-      title: 'Банкет',
-      place: 'Усадьба «Белая ROSA», банкетный зал',
+      time: '21:30',
+      title: 'Торт',
+      place: '',
     },
     {
-      time: '22:00',
-      title: 'Танцы',
-      place: 'Усадьба «Белая ROSA», банкетный зал',
+      time: '23:00',
+      title: 'Завершение',
+      place: '',
     },
   ] satisfies ProgramItem[],
   locations: [
@@ -91,6 +96,36 @@ export function formatWeddingDate(isoDate: string): string {
     hour: '2-digit',
     minute: '2-digit',
   }).format(new Date(isoDate))
+}
+
+export function formatShortDateLine(isoDate: string): string {
+  return new Intl.DateTimeFormat('ru-RU', {
+    day: 'numeric',
+    month: 'long',
+  }).format(new Date(isoDate))
+}
+
+export function formatWeekdayDateLine(isoDate: string): string {
+  const date = new Date(isoDate)
+  const weekday = new Intl.DateTimeFormat('ru-RU', { weekday: 'long' }).format(date)
+  const dayMonth = new Intl.DateTimeFormat('ru-RU', {
+    day: 'numeric',
+    month: 'long',
+  }).format(date)
+  return `${weekday} | ${dayMonth}`
+}
+
+export function getDateStrip(targetIso: string): Array<{ day: number; isTarget: boolean }> {
+  const target = new Date(targetIso)
+  const start = new Date(target)
+  start.setDate(target.getDate() - 5)
+  const days: Array<{ day: number; isTarget: boolean }> = []
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(start)
+    d.setDate(start.getDate() + i)
+    days.push({ day: d.getDate(), isTarget: d.toDateString() === target.toDateString() })
+  }
+  return days
 }
 
 export function formatDeadline(dateStr: string): string {

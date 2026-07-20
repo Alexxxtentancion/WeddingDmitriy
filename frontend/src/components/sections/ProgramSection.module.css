@@ -1,83 +1,83 @@
-.poster {
-  position: relative;
-  margin: 0 auto;
-  width: min(560px, 100%);
-  min-height: 640px;
-  background: #f7f4ea;
-  border-radius: 28px;
-  overflow: hidden;
-  box-shadow: 0 30px 90px rgba(36, 36, 36, 0.14);
-  border: 1px solid rgba(36, 36, 36, 0.12);
-  padding: 2.5rem 1.25rem 2rem;
-}
-
-.hanging {
-  position: absolute;
-  top: -10px;
-  right: 8px;
-  width: 110px;
-  pointer-events: none;
-  mix-blend-mode: screen;
-}
-
 .title {
   text-align: center;
   font-family: var(--font-script);
-  font-size: clamp(2.6rem, 8vw, 3.2rem);
+  font-size: clamp(2.6rem, 8vw, 3.4rem);
   color: rgba(36, 36, 36, 0.92);
-  margin-bottom: 1.5rem;
-  position: relative;
-  z-index: 1;
+  margin-bottom: 2rem;
 }
 
-.wave {
+.timeline {
+  position: relative;
+  width: min(560px, 100%);
+  margin: 0 auto;
+}
+
+.line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/decor/timeline-wave.svg') center / 100% 100% no-repeat;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.row {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  height: 210px;
+}
+
+.rowLeft {
+  justify-content: flex-start;
+}
+
+.rowRight {
+  justify-content: flex-end;
+}
+
+.dot {
   position: absolute;
   left: 50%;
-  top: 110px;
-  bottom: 40px;
-  width: 2px;
-  transform: translateX(-50%);
-  background: url('/decor/wave.svg') center / contain no-repeat;
-  opacity: 0.55;
-  pointer-events: none;
-}
-
-.grid {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.75rem 1rem;
+  top: 50%;
+  width: 13px;
+  height: 13px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #7f8f4a;
+  box-shadow: 0 0 0 4px rgba(247, 244, 234, 0.9);
+  z-index: 2;
 }
 
 .item {
+  width: 36%;
   text-align: center;
   color: rgba(36, 36, 36, 0.92);
 }
 
-.item:nth-child(even) {
-  margin-top: 2.5rem;
-}
-
 .icon {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 0.4rem;
+  width: 78px;
+  height: 78px;
+  margin: 0 auto 0.5rem;
   object-fit: contain;
-  /* Tilda icons are light gray line-art — make them dark on cream */
   filter: brightness(0);
-  opacity: 0.88;
+  opacity: 0.85;
 }
 
 .time {
   font-family: var(--font-serif);
-  font-size: 1.2rem;
+  font-size: 1.35rem;
   margin-bottom: 0.15rem;
 }
 
 .label {
   font-family: var(--font-serif);
-  font-size: 1.05rem;
+  font-size: 1.1rem;
 }
 
 .place {
@@ -87,12 +87,16 @@
 }
 
 @media (min-width: 768px) {
-  .hanging {
-    width: 130px;
-    right: 16px;
+  .row {
+    height: 240px;
   }
 
-  .poster {
-    padding: 3rem 1.75rem 2.25rem;
+  .item {
+    width: 34%;
+  }
+
+  .icon {
+    width: 90px;
+    height: 90px;
   }
 }

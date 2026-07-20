@@ -20,14 +20,18 @@ export function ProgramSection() {
       className={`${shared.section} ${shared.fadeIn} ${isVisible ? shared.fadeInVisible : ''}`}
     >
       <div className={shared.container}>
-        <div className={styles.poster}>
-          <img className={styles.hanging} src="/decor/hanging.png" alt="" aria-hidden="true" />
-          <h2 className={styles.title}>Тайминг</h2>
-          <div className={styles.wave} aria-hidden="true" />
+        <h2 className={styles.title}>Тайминг</h2>
 
-          <div className={styles.grid}>
-            {weddingConfig.program.map((item, index) => (
-              <div key={item.time + item.title} className={styles.item}>
+        <div className={styles.timeline}>
+          <div className={styles.line} aria-hidden="true" />
+
+          {weddingConfig.program.map((item, index) => (
+            <div
+              key={item.time + item.title}
+              className={`${styles.row} ${index % 2 === 0 ? styles.rowLeft : styles.rowRight}`}
+            >
+              <span className={styles.dot} aria-hidden="true" />
+              <div className={styles.item}>
                 <img
                   className={styles.icon}
                   src={icons[index % icons.length]}
@@ -36,10 +40,10 @@ export function ProgramSection() {
                 />
                 <p className={styles.time}>{item.time}</p>
                 <p className={styles.label}>{item.title}</p>
-                <p className={styles.place}>{item.place}</p>
+                {item.place && <p className={styles.place}>{item.place}</p>}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

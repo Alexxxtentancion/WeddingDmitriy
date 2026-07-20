@@ -26,13 +26,13 @@ export function InviteIntro({ onOpenInvite }: InviteIntroProps) {
 
   useEffect(() => {
     if (phase !== 'opening') return
-    const openTimer = window.setTimeout(() => setPhase('opened'), 560)
+    const openTimer = window.setTimeout(() => setPhase('opened'), 400)
     return () => window.clearTimeout(openTimer)
   }, [phase])
 
   useEffect(() => {
     if (phase !== 'opened') return
-    const leaveTimer = window.setTimeout(() => setPhase('leaving'), 1500)
+    const leaveTimer = window.setTimeout(() => setPhase('leaving'), 700)
     return () => window.clearTimeout(leaveTimer)
   }, [phase])
 
@@ -41,7 +41,7 @@ export function InviteIntro({ onOpenInvite }: InviteIntroProps) {
     const doneTimer = window.setTimeout(() => {
       setHidden(true)
       onOpenInvite()
-    }, 520)
+    }, 400)
     return () => window.clearTimeout(doneTimer)
   }, [phase, onOpenInvite])
 

@@ -1,0 +1,121 @@
+.content {
+  width: min(520px, 92vw);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.inviteText {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.55;
+  color: #1a1a1a;
+  margin-bottom: 2rem;
+}
+
+.weekdayLine {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  text-transform: lowercase;
+  color: rgba(127, 143, 74, 0.75);
+  margin-bottom: 0.85rem;
+}
+
+.dateStrip {
+  display: flex;
+  justify-content: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.dateCell {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(127, 143, 74, 0.65);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.65);
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  position: relative;
+  color: #1a1a1a;
+}
+
+.dateCellActive {
+  border-color: transparent;
+  background: transparent;
+}
+
+.dayNum {
+  position: relative;
+  z-index: 2;
+}
+
+.dateCellActive .dayNum {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.heartMark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.locationTitle {
+  font-family: var(--font-script);
+  font-size: clamp(2.6rem, 10vw, 3.6rem);
+  line-height: 1;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+.locationBlock {
+  margin-bottom: 1.25rem;
+}
+
+.locationName {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  margin-bottom: 0.25rem;
+  color: #1a1a1a;
+}
+
+.locationAddress {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.45;
+  color: #1a1a1a;
+}
+
+.mapButtonWrap {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem 0 1.5rem;
+}
+
+.mapButton {
+  width: auto;
+  min-width: 220px;
+  font-family: var(--font-sans);
+}
+
+@media (min-width: 768px) {
+  .dateCell {
+    width: 46px;
+    height: 46px;
+  }
+
+  .heartMark {
+    width: 46px;
+    height: 46px;
+  }
+}

@@ -71,7 +71,7 @@
   inset: 0;
   margin: auto;
   width: min(420px, 88vw);
-  animation: closedLeave 0.55s ease forwards;
+  animation: closedLeave 0.4s ease forwards;
 }
 
 .openedImg {
@@ -82,11 +82,11 @@
 }
 
 .openedEntering {
-  animation: openedEnter 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: openedEnter 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 .fadeOut {
-  animation: fadeOut 0.52s ease forwards;
+  animation: fadeOut 0.4s ease forwards;
   pointer-events: none;
 }
 
